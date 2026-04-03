@@ -1085,11 +1085,20 @@
                         </div>
                         <div class="form-group">
                             <label>Registration Type</label>
-                            <select>
-                                <option>Solo Developer</option>
-                                <option>Team Participation</option>
+                            <select id="regType">
+                                <option value="solo">Solo Developer</option>
+                                <option value="team">Team Participation</option>
                             </select>
                         </div>
+                        <div id="teamSizeContainer" class="form-group" style="display:none;">
+                            <label>Team Size</label>
+                            <select id="teamSize">
+                                <option value="2">2 Members</option>
+                                <option value="3">3 Members</option>
+                                <option value="4">4 Members</option>
+                            </select>
+                        </div>
+                        <div id="teamMemberSlots"></div>
                         <div style="display:flex; gap:10px;">
                             <button type="button" class="btn btn-outline prev-step" style="flex:1;">Back</button>
                             <button type="button" class="btn btn-cyan next-step" style="flex:1;">Next</button>
@@ -1313,6 +1322,44 @@
                 document.body.classList.add('light-mode');
                 themeBtn.innerText = '🌙';
             }
+        }
+
+        // Dynamic Team Slots
+        const regType = document.getElementById('regType');
+        const teamSizeSelect = document.getElementById('teamSize');
+        const teamSizeContainer = document.getElementById('teamSizeContainer');
+        const teamMemberSlots = document.getElementById('teamMemberSlots');
+
+        function updateMemberSlots() {
+            const size = parseInt(teamSizeSelect.value);
+            teamMemberSlots.innerHTML = '';
+            if(regType.value === 'team') {
+                for(let i = 2; i <= size; i++) {
+                    const slot = document.createElement('div');
+                    slot.className = 'form-group';
+                    slot.style.marginTop = '15px';
+                    slot.style.paddingTop = '15px';
+                    slot.style.borderTop = '1px solid var(--border)';
+                    slot.innerHTML = `
+                        <label>Member ${i} Name</label>
+                        <input type="text" placeholder="Enter member ${i} name">
+                        <label style="margin-top:10px;">Member ${i} Primary Skill</label>
+                        <input type="text" placeholder="e.g. Designer, Frontend">
+                    `;
+                    teamMemberSlots.appendChild(slot);
+                }
+            }
+        }
+
+        if(regType) {
+            regType.onchange = () => {
+                teamSizeContainer.style.display = regType.value === 'team' ? 'block' : 'none';
+                updateMemberSlots();
+            };
+        }
+
+        if(teamSizeSelect) {
+            teamSizeSelect.onchange = updateMemberSlots;
         }
 
         // Hamburger
