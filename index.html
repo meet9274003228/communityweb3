@@ -344,7 +344,12 @@
         }
 
         .event-card { position: relative; overflow: hidden; padding: 0 !important; }
-        .event-banner { height: 140px; width: 100%; position: relative; }
+        .event-banner { 
+            height: 160px; width: 100%; position: relative; 
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);
+        }
+        .event-banner svg { width: 60px; height: 60px; filter: drop-shadow(var(--glow)); }
         .event-content { padding: 25px; }
         .badge {
             font-size: 0.65rem;
@@ -633,7 +638,11 @@
             <div class="event-grid" id="eventList">
                 <!-- Sample Event 1 -->
                 <div class="glass-card event-card" data-type="hackathon virtual">
-                    <div class="event-banner" style="background: url('realistic_hackathon_photo_1775236217455.png') center/cover;"></div>
+                    <div class="event-banner">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
                     <div class="event-content">
                         <span class="badge">HACKATHON</span>
                         <h3>GenAI Buildathon 2026</h3>
@@ -647,7 +656,11 @@
                 </div>
                 <!-- Sample Event 2 -->
                 <div class="glass-card event-card" data-type="ideathon in-person">
-                    <div class="event-banner" style="background: url('realistic_workshop_photo_1775236236275.png') center/cover;"></div>
+                    <div class="event-banner">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v2"></path><path d="M12 18v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
+                        </svg>
+                    </div>
                     <div class="event-content">
                         <span class="badge">IDEATHON</span>
                         <h3>Xinity Ideathon S3</h3>
@@ -661,7 +674,11 @@
                 </div>
                 <!-- Sample Event 3 -->
                 <div class="glass-card event-card" data-type="hackathon in-person">
-                    <div class="event-banner" style="background: url('realistic_developer_win_photo_1775236252435.png') center/cover;"></div>
+                    <div class="event-banner">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                        </svg>
+                    </div>
                     <div class="event-content">
                         <span class="badge">HACKATHON</span>
                         <h3>Code & Conquer</h3>
@@ -675,7 +692,11 @@
                 </div>
                 <!-- Sample Event 4 -->
                 <div class="glass-card event-card" data-type="ideathon in-person">
-                    <div class="event-banner" style="background: url('realistic_tech_conference_hall_1775236273073.png') center/cover;"></div>
+                    <div class="event-banner">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
                     <div class="event-content">
                         <span class="badge">IDEATHON</span>
                         <h3>PromptWars Rajkot</h3>
