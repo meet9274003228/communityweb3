@@ -93,7 +93,15 @@
         .glass-card:hover {
             transform: translateY(-5px);
             border-color: var(--cyan);
-            box-shadow: var(--glow);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .icon-svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 8px var(--cyan-glow));
         }
 
         .btn {
@@ -524,28 +532,48 @@
                 <p>Our mission is to democratize opportunities in tech, providing a platform where merit is the only currency and innovation knows no bounds.</p>
                 <a href="#" class="btn btn-outline">Learn More</a>
             </div>
-            <div class="about-grid">
-                <div class="glass-card why-card">
-                    <span class="why-icon">🧠</span>
-                    <h4>Learn</h4>
-                    <p style="font-size: 0.85rem;">Workshops, resources, and mentorship from industry pros.</p>
-                </div>
-                <div class="glass-card why-card">
-                    <span class="why-icon">🤝</span>
-                    <h4>Collaborate</h4>
-                    <p style="font-size: 0.85rem;">Team up with top talent across diverse tech stacks.</p>
-                </div>
-                <div class="glass-card why-card">
-                    <span class="why-icon">🏆</span>
-                    <h4>Compete</h4>
-                    <p style="font-size: 0.85rem;">Participate in high-stakes hackathons and coding battles.</p>
-                </div>
-                <div class="glass-card why-card">
-                    <span class="why-icon">🚀</span>
-                    <h4>Grow</h4>
-                    <p style="font-size: 0.85rem;">Unlock internships, jobs, and startup opportunities.</p>
-                </div>
+        <div class="about-grid">
+            <div class="glass-card why-card">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3-4-3-5.5V4"></path>
+                    <path d="M12 2v2"></path><path d="M12 8c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4z"></path>
+                    <path d="M12 22a7 7 0 0 1-7-7c0-2 1-3.9 3-5.5s3-4 3-5.5"></path>
+                </svg>
+                <h4>Learn</h4>
+                <p style="font-size: 0.85rem;">Workshops, resources, and mentorship from industry pros.</p>
             </div>
+            <div class="glass-card why-card">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <h4>Collaborate</h4>
+                <p style="font-size: 0.85rem;">Team up with top talent across diverse tech stacks.</p>
+            </div>
+            <div class="glass-card why-card">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path>
+                </svg>
+                <h4>Compete</h4>
+                <p style="font-size: 0.85rem;">Participate in high-stakes hackathons and coding battles.</p>
+            </div>
+            <div class="glass-card why-card">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m4.5 16.5-1.5 3 3 1.5 1.5-3"></path>
+                    <path d="M21 3s-3.5 0-7 3.5c-2.4 2.4-7 11-7 11s8.6-4.6 11-7c3.5-3.5 3.5-7 3.5-7z"></path>
+                    <path d="M4.5 16.5c-1.5 1.5-3 5.5-3 5.5s4-1.5 5.5-3"></path>
+                    <path d="M13.5 6C12.5 7 11 10.5 11 10.5s3.5-1.5 4.5-2.5"></path>
+                </svg>
+                <h4>Grow</h4>
+                <p style="font-size: 0.85rem;">Unlock internships, jobs, and startup opportunities.</p>
+            </div>
+        </div>
         </section>
 
         <!-- Events Section -->
@@ -628,34 +656,55 @@
                 <h2 class="section-title">Community <span class="text-cyan">Perks</span></h2>
                 <p class="section-subtitle">Exclusive benefits for our innovators</p>
             </div>
-            <div class="perks-grid">
+            <div class="perks-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
                 <div class="glass-card why-card">
-                    <span class="why-icon">💼</span>
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
                     <h4>Internships</h4>
                     <p style="font-size: 0.85rem;">Exclusive access to openings in top tech giants and rising startups.</p>
                 </div>
                 <div class="glass-card why-card">
-                    <span class="why-icon">👕</span>
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.62 1.96v.03a2 2 0 0 0 1.56 1.94l1.34.33a2 2 0 0 1 1.1 2.3l-.58 2.3a2 2 0 0 0 1.94 2.5h9.28a2 2 0 0 0 1.94-2.5l-.58-2.3a2 2 0 0 1 1.1-2.3l1.34-.33a2 2 0 0 0 1.56-1.94v-.03a2 2 0 0 0-1.62-1.96z"></path>
+                    </svg>
                     <h4>Free Merch</h4>
                     <p style="font-size: 0.85rem;">Premium Xinity branded t-shirts, stickers, and swag kits for contributors.</p>
                 </div>
                 <div class="glass-card why-card">
-                    <span class="why-icon">💰</span>
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="8"></circle><line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
                     <h4>$99 Credits</h4>
                     <p style="font-size: 0.85rem;">Free platform credits and cloud resources for project building.</p>
                 </div>
                 <div class="glass-card why-card">
-                    <span class="why-icon">🍕</span>
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 11h.01"></path><path d="M11 15h.01"></path><path d="M16 16h.01"></path>
+                        <path d="m2 16 20 6-6-20L2 16Z"></path>
+                        <path d="M16.5 3.5a14 14 0 0 1 4 4"></path>
+                    </svg>
                     <h4>Meals</h4>
                     <p style="font-size: 0.85rem;">Complimentary high-quality meals and refreshments at all offline meets.</p>
                 </div>
                 <div class="glass-card why-card">
-                    <span class="why-icon">🎁</span>
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                        <rect x="2" y="7" width="20" height="5"></rect>
+                        <line x1="12" y1="22" x2="12" y2="7"></line>
+                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                    </svg>
                     <h4>Swag Bags</h4>
                     <p style="font-size: 0.85rem;">Exclusive goodies from our global sponsors like mugs and gadgets.</p>
                 </div>
                 <div class="glass-card why-card">
-                    <span class="why-icon">🏅</span>
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="6"></circle>
+                        <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                    </svg>
                     <h4>Prizes</h4>
                     <p style="font-size: 0.85rem;">Significant monetary cash prizes for top hackathon teams.</p>
                 </div>
