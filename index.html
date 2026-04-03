@@ -27,7 +27,6 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
-            cursor: none !important; /* Custom cursor */
         }
 
         html {
@@ -43,53 +42,9 @@
         }
 
         /* Dot Grid Background Animation */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        body {
             background-image: radial-gradient(var(--border) 1px, transparent 1px);
             background-size: 40px 40px;
-            z-index: -2;
-            transition: transform 0.1s ease-out;
-        }
-
-        /* Custom Cursor */
-        #cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--cyan);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px var(--cyan);
-        }
-
-        #cursor-follower {
-            width: 8px;
-            height: 8px;
-            background: var(--cyan);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Scroll Reveal Base */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* Typography */
@@ -224,7 +179,6 @@
             color: var(--silver);
             font-size: 0.8rem;
             transition: var(--transition);
-            cursor: pointer !important;
         }
 
         .nav-links a:hover {
@@ -250,7 +204,6 @@
             align-items: center;
             text-align: center;
             padding: 0 10%;
-            perspective: 1000px;
         }
 
         #particle-canvas {
@@ -261,58 +214,6 @@
             height: 100%;
             z-index: -1;
         }
-
-        /* Terminal Hero Style */
-        .terminal-hero {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--border);
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            color: var(--cyan);
-            margin-bottom: 30px;
-            font-size: 1rem;
-            display: inline-block;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        .terminal-header {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 5px;
-        }
-
-        .dot { width: 8px; height: 8px; border-radius: 50%; }
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27c93f; }
-
-        .typewriter::after {
-            content: '|';
-            animation: blink 0.8s infinite;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* Countdown */
-        .countdown-container {
-            display: flex;
-            gap: 20px;
-            margin-top: 40px;
-            justify-content: center;
-        }
-        .count-box {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 10px 15px;
-            border-radius: 8px;
-            min-width: 70px;
-        }
-        .count-num { font-size: 1.5rem; font-weight: 800; color: var(--cyan); display: block; }
-        .count-label { font-size: 0.6rem; letter-spacing: 1px; }
 
         .glitch-wrap {
             font-size: clamp(2rem, 10vw, 5.5rem);
@@ -554,7 +455,7 @@
 <body>
 
     <nav>
-        <a href="#" class="logo clickable">
+        <a href="#" class="logo">
             <svg class="logo-x" viewBox="0 0 100 100">
                 <path d="M20 20 L80 80 M80 20 L20 80" stroke="var(--cyan)" stroke-width="12" stroke-linecap="round" fill="none" />
             </svg>
@@ -564,67 +465,39 @@
             </div>
         </a>
         <div class="nav-links">
-            <a href="#hero" class="clickable">Home</a>
-            <a href="#events" class="clickable">Events</a>
-            <a href="#chapters" class="clickable">Chapters</a>
-            <a href="#perks" class="clickable">Perks</a>
-            <a href="#host" class="clickable">Host Event</a>
-            <a href="#" class="btn btn-outline clickable" style="padding: 8px 15px;">Login</a>
-            <a href="#" class="btn btn-cyan clickable" style="padding: 8px 15px;">Join Community</a>
+            <a href="#hero">Home</a>
+            <a href="#events">Events</a>
+            <a href="#chapters">Chapters</a>
+            <a href="#perks">Perks</a>
+            <a href="#host">Host Event</a>
+            <a href="#" class="btn btn-outline" style="padding: 8px 15px;">Login</a>
+            <a href="#" class="btn btn-cyan" style="padding: 8px 15px;">Join Community</a>
         </div>
         <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     </nav>
-
-    <!-- Custom Cursor -->
-    <div id="cursor"></div>
-    <div id="cursor-follower"></div>
 
     <main>
         <!-- Hero Section -->
         <section id="hero">
             <canvas id="particle-canvas"></canvas>
-            
-            <div class="terminal-hero reveal">
-                <div class="terminal-header">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                </div>
-                <div class="typewriter" id="typewriter">system_boot: initialized...</div>
-            </div>
-
-            <div class="glitch-wrap reveal">
+            <div class="glitch-wrap">
                 <span class="glitch" data-text="BUILD. COMPETE. BELONG.">BUILD. COMPETE. BELONG.</span>
             </div>
-            <p class="hero-sub reveal">Xinity Tech Community — Where India's best builders, hackers, and innovators come together to learn, compete, and grow.</p>
-            
-            <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;" class="reveal">
-                <a href="#events" class="btn btn-cyan clickable">Explore Events</a>
-                <a href="#host" class="btn btn-outline clickable">Join Community</a>
+            <p class="hero-sub">Xinity Tech Community — Where India's best builders, hackers, and innovators come together to learn, compete, and grow.</p>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                <a href="#events" class="btn btn-cyan">Explore Events</a>
+                <a href="#host" class="btn btn-outline">Join the Community</a>
             </div>
-
-            <div class="countdown-container reveal">
-                <div class="count-box">
-                    <span class="count-num" id="days">00</span>
-                    <span class="count-label">DAYS</span>
+            <div class="social-proof">
+                <div class="avatars">
+                    <div class="avatar"></div><div class="avatar"></div><div class="avatar"></div><div class="avatar"></div>
                 </div>
-                <div class="count-box">
-                    <span class="count-num" id="hours">00</span>
-                    <span class="count-label">HOURS</span>
-                </div>
-                <div class="count-box">
-                    <span class="count-num" id="minutes">00</span>
-                    <span class="count-label">MINS</span>
-                </div>
-                <div class="count-box">
-                    <span class="count-num" id="seconds">00</span>
-                    <span class="count-label">SECS</span>
-                </div>
+                <span style="font-size: 0.9rem; font-weight: 700;">50,000+ members joined</span>
             </div>
         </section>
 
         <!-- Stats Bar -->
-        <div class="stats-container reveal">
+        <div class="stats-container">
             <div class="stat-item">
                 <div class="stat-val counter" data-target="50000">0</div>
                 <div class="stat-label">COMMUNITY MEMBERS</div>
@@ -977,108 +850,7 @@
     </div>
 
     <script>
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        const follower = document.getElementById('cursor-follower');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            follower.style.left = e.clientX + 'px';
-            follower.style.top = e.clientY + 'px';
-            
-            // Grid displacement
-            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-            document.body.style.setProperty('--move-x', moveX + 'px');
-            document.body.style.setProperty('--move-y', moveY + 'px');
-        });
-
-        document.querySelectorAll('.clickable, a, button, .pill, .faq-q, .step-node').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
-                cursor.style.background = 'rgba(0, 229, 255, 0.1)';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursor.style.background = 'transparent';
-            });
-        });
-
-        // Typewriter Effect
-        const phrases = [
-            "system_boot: initialized...",
-            "node_status: optimal",
-            "accessing_innovators...",
-            "hack_mode: ENABLED",
-            "build. compete. conquer."
-        ];
-        let pIdx = 0, chIdx = 0;
-        const tw = document.getElementById('typewriter');
-        function type() {
-            if (chIdx < phrases[pIdx].length) {
-                tw.innerText = phrases[pIdx].substring(0, chIdx + 1);
-                chIdx++;
-                setTimeout(type, 100);
-            } else {
-                setTimeout(erase, 2000);
-            }
-        }
-        function erase() {
-            if (chIdx > 0) {
-                tw.innerText = phrases[pIdx].substring(0, chIdx - 1);
-                chIdx--;
-                setTimeout(erase, 50);
-            } else {
-                pIdx = (pIdx + 1) % phrases.length;
-                setTimeout(type, 500);
-            }
-        }
-        type();
-
-        // 3D Tilt Effect
-        document.querySelectorAll('.why-card, .chapter-card, .event-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const xc = rect.width / 2;
-                const yc = rect.height / 2;
-                const dx = x - xc;
-                const dy = y - yc;
-                card.style.transform = `perspective(1000px) rotateY(${dx / 10}deg) rotateX(${-dy / 10}deg) translateY(-5px)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateY(0)';
-            });
-        });
-
-        // Countdown
-        const targetDate = new Date("May 15, 2026 00:00:00").getTime();
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const gap = targetDate - now;
-            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
-            document.getElementById('days').innerText = Math.floor(gap / day);
-            document.getElementById('hours').innerText = Math.floor((gap % day) / hour);
-            document.getElementById('minutes').innerText = Math.floor((gap % hour) / minute);
-            document.getElementById('seconds').innerText = Math.floor((gap % minute) / second);
-        }
-        setInterval(updateCountdown, 1000);
-
-        // Scroll Reveals
-        const revObs = new IntersectionObserver((es) => {
-            es.forEach(e => {
-                if(e.isIntersecting) {
-                    e.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal, section').forEach(el => {
-            el.classList.add('reveal');
-            revObs.observe(el);
-        });
-
-        // Particle Background (keep previous logic)
+        // Particle Background
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -1119,8 +891,8 @@
         }
         loop();
 
-        // Keep Other existing logic (Counters, FAQ, Wizard, Filter, Hamburger)
-        const cObs = new IntersectionObserver((es) => {
+        // Counters
+        const obs = new IntersectionObserver((es) => {
             es.forEach(e => {
                 if(e.isIntersecting) {
                     const c = e.target;
@@ -1131,16 +903,18 @@
                         if(v >= t) { c.innerText = t.toLocaleString() + '+'; clearInterval(i); }
                         else { c.innerText = Math.floor(v).toLocaleString(); }
                     }, 20);
-                    cObs.unobserve(c);
+                    obs.unobserve(c);
                 }
             })
         });
-        document.querySelectorAll('.counter').forEach(c => cObs.observe(c));
+        document.querySelectorAll('.counter').forEach(c => obs.observe(c));
 
+        // FAQ 
         document.querySelectorAll('.faq-q').forEach(q => {
             q.onclick = () => q.parentElement.classList.toggle('active');
         });
 
+        // Wizard
         let step = 1;
         const nxt = document.getElementById('wiz-next');
         const prv = document.getElementById('wiz-prev');
@@ -1164,6 +938,7 @@
             document.getElementById('modal').style.display = 'flex';
         }
 
+        // Event Filter
         document.querySelectorAll('.pill').forEach(p => {
             p.onclick = () => {
                 document.querySelectorAll('.pill').forEach(_p => _p.classList.remove('active'));
@@ -1176,6 +951,7 @@
             }
         });
 
+        // Hamburger
         document.getElementById('hamburger').onclick = () => {
             document.querySelector('.nav-links').style.display = 
                 document.querySelector('.nav-links').style.display == 'flex' ? 'none' : 'flex';
