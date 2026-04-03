@@ -407,24 +407,6 @@
         .login-card { cursor: pointer; }
         .login-form { margin-top: 20px; }
 
-        /* Highlights Gallery */
-        .masonry {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-auto-rows: 200px;
-            gap: 15px;
-            grid-auto-flow: dense;
-        }
-        .moment-item { position: relative; border-radius: 8px; overflow: hidden; }
-        .moment-item:nth-child(2n) { grid-row: span 2; }
-        .moment-item:nth-child(3n) { grid-column: span 2; }
-        .moment-overlay { 
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            opacity: 0; transition: var(--transition);
-        }
-        .moment-item:hover .moment-overlay { opacity: 1; }
-
         /* FAQ Accordion */
         .faq-box { max-width: 900px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid var(--border); }
@@ -810,28 +792,6 @@
                         <input type="text" placeholder="Event ID" style="margin-bottom:10px;">
                         <button class="btn btn-cyan" style="width:100%;">View Stats</button>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Highlights -->
-        <section id="highlights">
-            <h2 class="section-title">Community <span class="text-cyan">Moments</span></h2>
-            <div class="masonry">
-                <div class="moment-item" style="background: url('hackathon_workspace_cyberpunk_1775226617231.png') center/cover no-repeat;">
-                    <div class="moment-overlay">Hackathon 2025</div>
-                </div>
-                <div class="moment-item" style="background: url('tech_innovators_meetup_1775226634751.png') center/cover no-repeat;">
-                    <div class="moment-overlay">Rajkot Meetup</div>
-                </div>
-                <div class="moment-item" style="background: url('tech_award_ceremony_xlogo_1775226653653.png') center/cover no-repeat;">
-                    <div class="moment-overlay">Award Ceremony</div>
-                </div>
-                <div class="moment-item" style="background: url('software_workshop_modern_tech_1775226672360.png') center/cover no-repeat;">
-                    <div class="moment-overlay">Workshop Day</div>
-                </div>
-                <div class="moment-item" style="background: url('tech_conference_developers_crowd_neon_1775226695682.png') center/cover no-repeat;">
-                    <div class="moment-overlay">Demo Day</div>
                 </div>
             </div>
         </section>
