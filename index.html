@@ -10,16 +10,31 @@
     <style>
         :root {
             --bg: #000000;
-            --cyan: #00E5FF;
+            --text-main: #ffffff;
+            --text-sub: #c8c8d8;
+            --cyan: #00e5ff;
             --cyan-glow: rgba(0, 229, 255, 0.3);
-            --silver: #C8C8D8;
-            --white: #FFFFFF;
             --glass: rgba(255, 255, 255, 0.04);
             --border: rgba(0, 229, 255, 0.2);
             --font-head: 'Orbitron', sans-serif;
             --font-body: 'Rajdhani', sans-serif;
             --glow: 0 0 24px rgba(0, 229, 255, 0.3);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --silver: #C8C8D8;
+            --white: #FFFFFF;
+            --nav-bg: rgba(0,0,0,0.8);
+        }
+
+        body.light-mode {
+            --bg: #f5f7fa;
+            --text-main: #1a1a1a;
+            --text-sub: #4a5568;
+            --glass: rgba(0, 0, 0, 0.02);
+            --border: rgba(0, 0, 0, 0.1);
+            --white: #000000;
+            --silver: #2d3748;
+            --cyan-glow: rgba(0, 229, 255, 0.1);
+            --nav-bg: rgba(255, 255, 255, 0.9);
         }
 
         * {
@@ -35,14 +50,11 @@
 
         body {
             background-color: var(--bg);
-            color: var(--silver);
+            color: var(--text-sub);
             font-family: var(--font-body);
             overflow-x: hidden;
             line-height: 1.6;
-        }
-
-        /* Dot Grid Background Animation */
-        body {
+            transition: background 0.3s, color 0.3s;
             background-image: radial-gradient(var(--border) 1px, transparent 1px);
             background-size: 40px 40px;
         }
@@ -139,20 +151,19 @@
 
         /* Navbar */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(20px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px;
+            background: var(--nav-bg); backdrop-filter: blur(20px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%; z-index: 1000; border-bottom: 1px solid var(--border);
         }
+
+        .theme-toggle {
+            background: var(--glass); border: 1px solid var(--border); color: var(--cyan);
+            width: 35px; height: 35px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; transition: var(--transition); margin: 0 10px;
+        }
+        .theme-toggle:hover { border-color: var(--cyan); box-shadow: var(--glow); }
 
         .logo {
             display: flex;
@@ -343,7 +354,9 @@
             gap: 25px;
         }
 
-        .event-card { position: relative; overflow: hidden; padding: 0 !important; }
+        .event-card { position: relative; overflow: hidden; padding: 0 !important; cursor: pointer !important; }
+        .event-card * { cursor: pointer !important; }
+        .event-card:hover { transform: translateY(-5px); border-color: var(--cyan); box-shadow: var(--glow); }
         .event-banner { 
             height: 160px; width: 100%; position: relative; 
             display: flex; align-items: center; justify-content: center;
@@ -522,7 +535,7 @@
             <a href="#chapters">Chapters</a>
             <a href="#elite">Elite</a>
             <a href="#perks">Perks</a>
-            <a href="#host">Host Event</a>
+            <button id="themeBtn" class="theme-toggle">🌓</button>
             <a href="#" class="btn btn-outline" style="padding: 8px 15px;">Login</a>
             <a href="#" class="btn btn-cyan" style="padding: 8px 15px;">Join Community</a>
         </div>
@@ -637,7 +650,7 @@
             </div>
             <div class="event-grid" id="eventList">
                 <!-- Sample Event 1 -->
-                <div class="glass-card event-card" data-type="hackathon virtual">
+                <div class="glass-card event-card clickable-card" data-type="hackathon virtual" data-event="GenAI Buildathon 2026">
                     <div class="event-banner">
                         <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>
@@ -651,11 +664,11 @@
                             <span>📍 Virtual</span>
                             <span>🆓 Free Registration</span>
                         </div>
-                        <button class="btn btn-cyan register-btn" data-event="GenAI Buildathon 2026" style="width: 100%; text-align: center;">Register Now</button>
+                        <button class="btn btn-cyan register-btn" style="width: 100%; text-align: center;">Register Now</button>
                     </div>
                 </div>
                 <!-- Sample Event 2 -->
-                <div class="glass-card event-card" data-type="ideathon in-person">
+                <div class="glass-card event-card clickable-card" data-type="ideathon in-person" data-event="Xinity Ideathon S3">
                     <div class="event-banner">
                         <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2v2"></path><path d="M12 18v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
@@ -669,11 +682,11 @@
                             <span>📍 Rajkot, Gujarat</span>
                             <span>🆓 Free Registration</span>
                         </div>
-                        <button class="btn btn-cyan register-btn" data-event="Xinity Ideathon S3" style="width: 100%; text-align: center;">Register Now</button>
+                        <button class="btn btn-cyan register-btn" style="width: 100%; text-align: center;">Register Now</button>
                     </div>
                 </div>
                 <!-- Sample Event 3 -->
-                <div class="glass-card event-card" data-type="hackathon in-person">
+                <div class="glass-card event-card clickable-card" data-type="hackathon in-person" data-event="Code & Conquer">
                     <div class="event-banner">
                         <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
@@ -687,11 +700,11 @@
                             <span>📍 Hybrid</span>
                             <span>🆓 Free Registration</span>
                         </div>
-                        <button class="btn btn-cyan register-btn" data-event="Code & Conquer" style="width: 100%; text-align: center;">Register Now</button>
+                        <button class="btn btn-cyan register-btn" style="width: 100%; text-align: center;">Register Now</button>
                     </div>
                 </div>
                 <!-- Sample Event 4 -->
-                <div class="glass-card event-card" data-type="ideathon in-person">
+                <div class="glass-card event-card clickable-card" data-type="ideathon in-person" data-event="PromptWars Rajkot">
                     <div class="event-banner">
                         <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -705,7 +718,7 @@
                             <span>📍 Rajkot</span>
                             <span>🆓 Free Registration</span>
                         </div>
-                        <button class="btn btn-cyan register-btn" data-event="PromptWars Rajkot" style="width: 100%; text-align: center;">Register Now</button>
+                        <button class="btn btn-cyan register-btn" style="width: 100%; text-align: center;">Register Now</button>
                     </div>
                 </div>
             </div>
@@ -1281,6 +1294,7 @@
         // Registration Modal Logic
         const regModal = document.getElementById('regModal');
         const regBtns = document.querySelectorAll('.register-btn');
+        const clickCards = document.querySelectorAll('.clickable-card');
         const closeBtns = document.querySelectorAll('.modal-close, .modal-close-btn');
         const regForm = document.getElementById('regForm');
         const formContainer = document.getElementById('formContainer');
@@ -1290,12 +1304,21 @@
         const steps = document.querySelectorAll('.form-step');
         const dots = document.querySelectorAll('.progress-dot');
 
+        function openModal(eventName) {
+            document.getElementById('regEventName').innerText = eventName;
+            regModal.style.display = 'flex';
+            resetRegForm();
+        }
+
         regBtns.forEach(btn => {
-            btn.onclick = () => {
-                document.getElementById('regEventName').innerText = btn.getAttribute('data-event');
-                regModal.style.display = 'flex';
-                resetRegForm();
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                openModal(btn.closest('.event-card').dataset.event);
             };
+        });
+
+        clickCards.forEach(card => {
+            card.onclick = () => openModal(card.dataset.event);
         });
 
         closeBtns.forEach(btn => btn.onclick = () => regModal.style.display = 'none');
@@ -1336,9 +1359,25 @@
         if(regForm) {
             regForm.onsubmit = (e) => {
                 e.preventDefault();
+                // Fix: Manual transition to success screen to bypass potential hidden field validation blocks
                 formContainer.style.display = 'none';
                 successScreen.style.display = 'block';
             };
+        }
+
+        // Theme Toggle
+        const themeBtn = document.getElementById('themeBtn');
+        if(themeBtn) {
+            themeBtn.onclick = () => {
+                document.body.classList.toggle('light-mode');
+                const isLight = document.body.classList.contains('light-mode');
+                themeBtn.innerText = isLight ? '🌙' : '☀️';
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            };
+            if(localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-mode');
+                themeBtn.innerText = '🌙';
+            }
         }
 
         // Hamburger
