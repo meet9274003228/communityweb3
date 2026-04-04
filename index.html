@@ -1522,6 +1522,13 @@
                 }
             }
         });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.onclick = () => {
+                item.classList.toggle('active');
+            };
+        });
     </script>
 </body>
 </html>
