@@ -968,7 +968,7 @@
                     <div class="login-form">
                         <input type="text" placeholder="Event ID" style="margin-bottom:10px;">
                         <input type="password" placeholder="Admin Password" style="margin-bottom:10px;">
-                        <button class="btn btn-outline" style="width:100%;">Login</button>
+                        <button id="adminLogin" class="btn btn-outline" style="width:100%;">Login</button>
                     </div>
                 </div>
                 <div class="glass-card login-card">
@@ -977,7 +977,7 @@
                     <div class="login-form">
                         <input type="text" placeholder="Event ID" style="margin-bottom:10px;">
                         <input type="password" placeholder="Judge Key" style="margin-bottom:10px;">
-                        <button class="btn btn-outline" style="width:100%;">Authorize</button>
+                        <button id="judgeLogin" class="btn btn-outline" style="width:100%;">Authorize</button>
                     </div>
                 </div>
                 <div class="glass-card login-card">
@@ -1480,6 +1480,37 @@
             if(e.target == chapterModal) chapterModal.style.display = 'none';
             if(e.target == document.getElementById('modal')) document.getElementById('modal').style.display = 'none';
         };
+
+        // Simulated Login Logic
+        const loginHandles = ['adminLogin', 'judgeLogin'];
+        loginHandles.forEach(id => {
+            const btn = document.getElementById(id);
+            if(btn) {
+                btn.onclick = () => {
+                    const originalText = btn.innerText;
+                    btn.innerHTML = `<span class="loading-spin">↻</span> VERIFYING...`;
+                    btn.style.pointerEvents = 'none';
+                    
+                    setTimeout(() => {
+                        const successModal = document.getElementById('modal');
+                        const h2 = successModal.querySelector('h2');
+                        const p = successModal.querySelector('p');
+                        const idBox = document.getElementById('event-id');
+                        
+                        h2.innerText = '🔐 IDENTITY VERIFIED';
+                        h2.className = 'text-cyan';
+                        p.innerText = 'Redirecting to your secure community dashboard...';
+                        idBox.innerText = 'ACCESS GRANTED';
+                        idBox.style.borderStyle = 'solid';
+                        
+                        successModal.style.display = 'flex';
+                        
+                        btn.innerHTML = originalText;
+                        btn.style.pointerEvents = 'all';
+                    }, 1500);
+                }
+            }
+        });
     </script>
 </body>
 </html>
