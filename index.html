@@ -1398,6 +1398,18 @@
                 }
             };
         });
+
+        // Chapter Join Feedback
+        document.querySelectorAll('.chapter-card .btn').forEach(btn => {
+            btn.onclick = (e) => {
+                e.preventDefault();
+                btn.innerHTML = '✅ REQUESTED';
+                btn.style.background = 'rgba(0, 229, 255, 0.1)';
+                btn.style.borderColor = 'var(--cyan)';
+                btn.style.color = 'var(--cyan)';
+                btn.style.pointerEvents = 'none';
+            };
+        });
     </script>
 </body>
 </html>
