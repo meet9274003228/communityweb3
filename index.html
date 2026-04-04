@@ -1236,10 +1236,6 @@
         });
         document.querySelectorAll('.counter').forEach(c => obs.observe(c));
 
-        // FAQ 
-        document.querySelectorAll('.faq-question').forEach(q => {
-            q.onclick = () => q.parentElement.classList.toggle('active');
-        });
 
         // Wizard
         let step = 1;
