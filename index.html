@@ -546,7 +546,19 @@
             <a href="#chapters">Chapters</a>
             <a href="#elite">Elite</a>
             <a href="#perks">Perks</a>
-            <button id="themeBtn" class="theme-toggle">🌓</button>
+            <button id="themeBtn" class="theme-toggle">
+                <svg id="themeIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
             <a href="#" class="btn btn-outline" style="padding: 8px 15px;">Login</a>
             <a href="#" class="btn btn-cyan" style="padding: 8px 15px;">Join Community</a>
         </div>
@@ -942,7 +954,7 @@
                     <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top:30px;">
                         <button type="button" class="btn btn-outline" id="wiz-prev" style="display:none;">Back</button>
                         <button type="button" class="btn btn-cyan" id="wiz-next">Next</button>
-                        <button type="submit" class="btn btn-cyan" id="wiz-submit" style="display:none;">🚀 Create Event</button>
+                        <button type="button" class="btn btn-cyan" id="wiz-submit-btn" style="display:none;">🚀 Create Event</button>
                     </div>
                 </form>
             </div>
@@ -953,6 +965,7 @@
                     <p style="font-size:0.8rem; margin:10px 0;">Manage registrations, teams, and rounds.</p>
                     <div class="login-form">
                         <input type="text" placeholder="Event ID" style="margin-bottom:10px;">
+                        <input type="password" placeholder="Admin Password" style="margin-bottom:10px;">
                         <button class="btn btn-outline" style="width:100%;">Login</button>
                     </div>
                 </div>
@@ -961,6 +974,7 @@
                     <p style="font-size:0.8rem; margin:10px 0;">Real-time scoring and evaluator interface.</p>
                     <div class="login-form">
                         <input type="text" placeholder="Event ID" style="margin-bottom:10px;">
+                        <input type="password" placeholder="Judge Key" style="margin-bottom:10px;">
                         <button class="btn btn-outline" style="width:100%;">Authorize</button>
                     </div>
                 </div>
@@ -1199,7 +1213,7 @@
         let step = 1;
         const nxt = document.getElementById('wiz-next');
         const prv = document.getElementById('wiz-prev');
-        const sub = document.getElementById('wiz-submit');
+        const sub = document.getElementById('wiz-submit-btn');
         function upWiz() {
             document.querySelectorAll('.wiz-step').forEach(s => s.classList.remove('active'));
             document.getElementById(`wiz-step-${step}`).classList.add('active');
@@ -1212,12 +1226,14 @@
         }
         nxt.onclick = () => { step++; upWiz(); }
         prv.onclick = () => { step--; upWiz(); }
-        document.getElementById('wiz-form').onsubmit = (e) => {
-            e.preventDefault();
-            const id = 'XNTY-' + Math.random().toString(36).substr(2, 4).toUpperCase();
-            document.getElementById('event-id').innerText = id;
-            document.getElementById('modal').style.display = 'flex';
+        if(sub) {
+            sub.onclick = () => {
+                const id = 'XNTY-' + Math.random().toString(36).substr(2, 4).toUpperCase();
+                document.getElementById('event-id').innerText = id;
+                document.getElementById('modal').style.display = 'flex';
+            };
         }
+        document.getElementById('wiz-form').onsubmit = (e) => e.preventDefault();
 
         // Event Filter
         document.querySelectorAll('.pill').forEach(p => {
@@ -1311,16 +1327,19 @@
 
         // Theme Toggle
         const themeBtn = document.getElementById('themeBtn');
+        const sunSVG = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonSVG = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+        
         if(themeBtn) {
             themeBtn.onclick = () => {
                 document.body.classList.toggle('light-mode');
                 const isLight = document.body.classList.contains('light-mode');
-                themeBtn.innerText = isLight ? '🌙' : '☀️';
+                themeBtn.innerHTML = isLight ? moonSVG : sunSVG;
                 localStorage.setItem('theme', isLight ? 'light' : 'dark');
             };
             if(localStorage.getItem('theme') === 'light') {
                 document.body.classList.add('light-mode');
-                themeBtn.innerText = '🌙';
+                themeBtn.innerHTML = moonSVG;
             }
         }
 
