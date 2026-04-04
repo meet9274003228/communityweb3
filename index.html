@@ -97,6 +97,17 @@
             margin-bottom: 10px;
         }
 
+        .faq-question span {
+            transition: transform 0.3s ease;
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-item.active .faq-question span {
+            transform: rotate(180deg);
+        }
+
         .section-subtitle {
             font-size: 1.1rem;
             color: var(--cyan);
@@ -498,10 +509,10 @@
         /* FAQ Accordion */
         .faq-box { max-width: 900px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid var(--border); }
-        .faq-q { padding: 25px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-head); font-size: 0.95rem; }
-        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding-right: 50px; }
-        .faq-item.active .faq-a { max-height: 300px; padding-bottom: 25px; }
-        .faq-item.active .faq-q { color: var(--cyan); border-left: 3px solid var(--cyan); padding-left: 20px; }
+        .faq-question { padding: 25px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-head); font-size: 0.95rem; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding-right: 50px; }
+        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 25px; }
+        .faq-item.active .faq-question { color: var(--cyan); border-left: 3px solid var(--cyan); padding-left: 20px; }
 
         /* Footer */
         footer { border-top: 1px solid var(--cyan); background: #000; padding: 80px 10% 40px; }
@@ -996,16 +1007,16 @@
             <h2 class="section-title">Common <span class="text-cyan">Questions</span></h2>
             <div class="faq-box">
                 <div class="faq-item">
-                    <div class="faq-q">What is Xinity Tech Community? <span>+</span></div>
-                    <div class="faq-a">Xinity is a premier innovation network dedicated to empowering the next generation of tech talent in India through practical competition and community support.</div>
+                    <div class="faq-question">What is Xinity Tech Community? <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+                    <div class="faq-answer">Xinity is a premier innovation network dedicated to empowering the next generation of tech talent in India through competition and community.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-q">Who can join? Is it only for students? <span>+</span></div>
-                    <div class="faq-a">Everyone is welcome! While most members are university students, we have a growing number of industry professionals and early-stage entrepreneurs.</div>
+                    <div class="faq-question">Who can join? Is it only for students? <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+                    <div class="faq-answer">Everyone is welcome! While most members are university students, we have many industry professionals and entrepreneurs in the ecosystem.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-q">Is participation in events free? <span>+</span></div>
-                    <div class="faq-a">Yes, 99% of our community-hosted events are completely free for participants to ensure accessibility.</div>
+                    <div class="faq-question">Is participation in events free? <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+                    <div class="faq-answer">Yes, 99% of our community-hosted events are completely free to ensure maximum accessibility for Indian builders.</div>
                 </div>
             </div>
         </section>
