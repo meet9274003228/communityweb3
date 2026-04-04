@@ -1146,6 +1146,47 @@
         </div>
     </div>
 
+    <!-- Chapter Modal -->
+    <div id="chapterModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close chapter-close">&times;</span>
+            <div id="chapterFormContainer">
+                <div class="modal-header">
+                    <h2 class="text-head text-cyan" style="font-size:1.2rem;">Join Chapter</h2>
+                    <p id="targetChapterName" style="font-size:0.8rem; color:var(--silver);">Select Chapter</p>
+                </div>
+                <form id="chapterForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>University Email</label>
+                        <input type="email" placeholder="example@college.edu" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Department / Year</label>
+                        <input type="text" placeholder="e.g. CS - 3rd Year" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Statement of Interest</label>
+                        <textarea rows="3" placeholder="Why do you want to join this chapter?"></textarea>
+                    </div>
+                    <button type="button" id="submitChapterApp" class="btn btn-cyan" style="width:100%;">Submit Application</button>
+                </form>
+            </div>
+
+            <!-- Chapter Success Screen -->
+            <div id="chapterSuccessScreen" class="success-screen">
+                <span class="success-icon">✓</span>
+                <h2 class="text-head" style="color: var(--text-main); margin-bottom:10px;">Application Forwarded!</h2>
+                <p style="margin-bottom: 20px; font-size:0.85rem; color: var(--text-sub);">Your request to join the chapter has been sent to the leadership team.</p>
+                <div style="font-family:var(--font-head); font-size:1.1rem; background:var(--glass); padding:10px; border:1px dashed var(--cyan); margin-bottom:20px; color:var(--cyan);">STATUS: PENDING REVIEW</div>
+                <button class="btn btn-cyan chapter-close-btn" style="width:100%;">Return to Homepage</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Particle Background
         const canvas = document.getElementById('particle-canvas');
@@ -1252,12 +1293,17 @@
 
         // Registration Modal Logic
         const regModal = document.getElementById('regModal');
+        const chapterModal = document.getElementById('chapterModal');
         const regBtns = document.querySelectorAll('.register-btn');
         const clickCards = document.querySelectorAll('.clickable-card');
         const closeBtns = document.querySelectorAll('.modal-close, .modal-close-btn');
+        const chapterCloseBtns = document.querySelectorAll('.chapter-close, .chapter-close-btn');
         const regForm = document.getElementById('regForm');
+        const chapterForm = document.getElementById('chapterForm');
         const formContainer = document.getElementById('formContainer');
         const successScreen = document.getElementById('successScreen');
+        const chapterFormContainer = document.getElementById('chapterFormContainer');
+        const chapterSuccessScreen = document.getElementById('chapterSuccessScreen');
         const nextBtns = document.querySelectorAll('.next-step');
         const prevBtns = document.querySelectorAll('.prev-step');
         const steps = document.querySelectorAll('.form-step');
@@ -1399,17 +1445,41 @@
             };
         });
 
-        // Chapter Join Feedback
+        // Chapter Registration Logic
+        function openChapterModal(chapterName) {
+            const label = document.getElementById('targetChapterName');
+            if(label) label.innerText = `Join ${chapterName}`;
+            if(chapterModal) chapterModal.style.display = 'flex';
+            if(chapterFormContainer) chapterFormContainer.style.display = 'block';
+            if(chapterSuccessScreen) chapterSuccessScreen.style.display = 'none';
+            if(chapterForm) chapterForm.reset();
+        }
+
         document.querySelectorAll('.chapter-card .btn').forEach(btn => {
             btn.onclick = (e) => {
                 e.preventDefault();
-                btn.innerHTML = '✅ REQUESTED';
-                btn.style.background = 'rgba(0, 229, 255, 0.1)';
-                btn.style.borderColor = 'var(--cyan)';
-                btn.style.color = 'var(--cyan)';
-                btn.style.pointerEvents = 'none';
+                const name = btn.parentElement.querySelector('h4').innerText.trim();
+                openChapterModal(name);
             };
         });
+
+        chapterCloseBtns.forEach(btn => {
+            btn.onclick = () => chapterModal.style.display = 'none';
+        });
+
+        const submitChapterApp = document.getElementById('submitChapterApp');
+        if(submitChapterApp) {
+            submitChapterApp.onclick = () => {
+                if(chapterFormContainer) chapterFormContainer.style.display = 'none';
+                if(chapterSuccessScreen) chapterSuccessScreen.style.display = 'block';
+            };
+        }
+
+        window.onclick = (e) => { 
+            if(e.target == regModal) regModal.style.display = 'none'; 
+            if(e.target == chapterModal) chapterModal.style.display = 'none';
+            if(e.target == document.getElementById('modal')) document.getElementById('modal').style.display = 'none';
+        };
     </script>
 </body>
 </html>
