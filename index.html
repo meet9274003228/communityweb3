@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #000000;
+            scroll-behavior: smooth;
+            --bg: #030712;
             --text-main: #ffffff;
             --text-sub: #c8c8d8;
             --cyan: #00e5ff;
@@ -80,7 +81,8 @@
 
         /* Shared Components */
         section {
-            padding: 100px 8%;
+            padding: 120px 10%;
+            scroll-margin-top: 80px;
             position: relative;
         }
 
@@ -1381,11 +1383,21 @@
             teamSizeSelect.onchange = updateMemberSlots;
         }
 
-        // Hamburger
-        document.getElementById('hamburger').onclick = () => {
-            document.querySelector('.nav-links').style.display = 
-                document.querySelector('.nav-links').style.display == 'flex' ? 'none' : 'flex';
+        // Hamburger & Auto-Close
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.onclick = () => {
+            navLinks.style.display = navLinks.style.display == 'flex' ? 'none' : 'flex';
         }
+
+        document.querySelectorAll('.nav-links a, .nav-links button').forEach(link => {
+            link.onclick = () => {
+                if(window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                }
+            };
+        });
     </script>
 </body>
 </html>
