@@ -852,7 +852,7 @@
             <div class="glass-card apply-card">
                 <h3>Start a Chapter at Your College</h3>
                 <p style="margin: 15px 0 25px;">Become a student leader and build your own innovation ecosystem.</p>
-                <a href="#" class="btn btn-cyan">Apply Now</a>
+                <a href="#" id="startChapterBtn" class="btn btn-cyan">Apply Now</a>
             </div>
         </section>
 
@@ -1198,6 +1198,51 @@
         </div>
     </div>
 
+    <!-- Start Chapter Modal -->
+    <div id="startChapterModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close start-chapter-close">&times;</span>
+            <div id="startChapterFormContainer">
+                <div class="modal-header">
+                    <h2 class="text-head text-cyan" style="font-size:1.2rem;">Start a Chapter</h2>
+                    <p style="font-size:0.8rem; color:var(--silver);">Lead the innovation at your campus</p>
+                </div>
+                <form id="startChapterForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>University Email</label>
+                        <input type="email" placeholder="example@college.edu" required>
+                    </div>
+                    <div class="form-group">
+                        <label>College Name & City</label>
+                        <input type="text" placeholder="e.g. IIT Delhi" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Current Position/Status</label>
+                        <input type="text" placeholder="e.g. 3rd Year Student / Club Lead" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Vision (In 100 words)</label>
+                        <textarea rows="4" placeholder="What is your vision for the chapter?"></textarea>
+                    </div>
+                    <button type="button" id="submitStartChapter" class="btn btn-cyan" style="width:100%;">Submit Leadership Application</button>
+                </form>
+            </div>
+
+            <!-- Start Success Screen -->
+            <div id="startSuccessScreen" class="success-screen">
+                <span class="success-icon" style="color:#FFD700;">★</span>
+                <h2 class="text-head" style="color: var(--text-main); margin-bottom:10px;">Application Received!</h2>
+                <p style="margin-bottom: 20px; font-size:0.85rem; color: var(--text-sub);">Your vision matches our elite standards. The Xinity leadership team will review your profile shortly.</p>
+                <div style="font-family:var(--font-head); font-size:1.1rem; background:rgba(255,215,0,0.1); padding:10px; border:1px dashed #FFD700; margin-bottom:20px; color:#FFD700;">STATUS: UNDER ELITE REVIEW</div>
+                <button class="btn btn-cyan start-chapter-close-btn" style="width:100%;">Return to Homepage</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Particle Background
         const canvas = document.getElementById('particle-canvas');
@@ -1305,16 +1350,21 @@
         // Registration Modal Logic
         const regModal = document.getElementById('regModal');
         const chapterModal = document.getElementById('chapterModal');
+        const startChapterModal = document.getElementById('startChapterModal');
         const regBtns = document.querySelectorAll('.register-btn');
         const clickCards = document.querySelectorAll('.clickable-card');
         const closeBtns = document.querySelectorAll('.modal-close, .modal-close-btn');
         const chapterCloseBtns = document.querySelectorAll('.chapter-close, .chapter-close-btn');
+        const startChapterCloseBtns = document.querySelectorAll('.start-chapter-close, .start-chapter-close-btn');
         const regForm = document.getElementById('regForm');
         const chapterForm = document.getElementById('chapterForm');
+        const startChapterForm = document.getElementById('startChapterForm');
         const formContainer = document.getElementById('formContainer');
         const successScreen = document.getElementById('successScreen');
         const chapterFormContainer = document.getElementById('chapterFormContainer');
         const chapterSuccessScreen = document.getElementById('chapterSuccessScreen');
+        const startChapterFormContainer = document.getElementById('startChapterFormContainer');
+        const startSuccessScreen = document.getElementById('startSuccessScreen');
         const nextBtns = document.querySelectorAll('.next-step');
         const prevBtns = document.querySelectorAll('.prev-step');
         const steps = document.querySelectorAll('.form-step');
@@ -1478,6 +1528,30 @@
             btn.onclick = () => chapterModal.style.display = 'none';
         });
 
+        // Start Chapter Logic
+        const startChapterBtn = document.getElementById('startChapterBtn');
+        if(startChapterBtn) {
+            startChapterBtn.onclick = (e) => {
+                e.preventDefault();
+                if(startChapterModal) startChapterModal.style.display = 'flex';
+                if(startChapterFormContainer) startChapterFormContainer.style.display = 'block';
+                if(startSuccessScreen) startSuccessScreen.style.display = 'none';
+                if(startChapterForm) startChapterForm.reset();
+            };
+        }
+
+        startChapterCloseBtns.forEach(btn => {
+            btn.onclick = () => startChapterModal.style.display = 'none';
+        });
+
+        const submitStartChapter = document.getElementById('submitStartChapter');
+        if(submitStartChapter) {
+            submitStartChapter.onclick = () => {
+                if(startChapterFormContainer) startChapterFormContainer.style.display = 'none';
+                if(startSuccessScreen) startSuccessScreen.style.display = 'block';
+            };
+        }
+
         const submitChapterApp = document.getElementById('submitChapterApp');
         if(submitChapterApp) {
             submitChapterApp.onclick = () => {
@@ -1489,6 +1563,7 @@
         window.onclick = (e) => { 
             if(e.target == regModal) regModal.style.display = 'none'; 
             if(e.target == chapterModal) chapterModal.style.display = 'none';
+            if(e.target == startChapterModal) startChapterModal.style.display = 'none';
             if(e.target == document.getElementById('modal')) document.getElementById('modal').style.display = 'none';
         };
 
